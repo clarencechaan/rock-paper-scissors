@@ -6,6 +6,15 @@
 </head>
 <body>
   <h1>Rock Paper Scissors</h1>
+  <button id="rock">Rock</button>
+  <button id="paper">Paper</button>
+  <button id="scissors">Scissors</button>
+  <div>
+    <p id="playerScore">Player score: 0</p>
+    <p id="computerScore">Computer score: 0</p>
+    <p id="message">Choose your hand.</p>
+  </div>
+
   <script>
 
     let playerScore = 0;
@@ -37,34 +46,75 @@
           || playerSelection === "Scissors" && computerSelection === "Paper"
           || playerSelection === "Paper" && computerSelection === "Rock") {
             playerScore++;
-            return "You win! " + playerSelection + " beats " + computerSelection;
+            console.log("You win.")
+            return "You win! " + playerSelection + " beats " + computerSelection + ".";
         } else if (playerSelection === "Rock" && computerSelection === "Paper"
           || playerSelection === "Scissors" && computerSelection === "Rock"
           || playerSelection === "Paper" && computerSelection === "Scissors") {
             computerScore++;
-            return "You lose! " + computerSelection + " beats " + playerSelection;
+            console.log("You lose.")
+            return "You lose! " + computerSelection + " beats " + playerSelection + ".";
           } else if (playerSelection === computerSelection) {
-            return "Tie! " + playerSelection + " ties with " + computerSelection;
+            console.log("Tie game.")
+            return "Tie! " + playerSelection + " ties with " + computerSelection + ".";
           }
     }
 
-    function game() {
-      
-      for (let i = 0; i < 5; i++) {
-        console.log(playRound(prompt("Choose rock, paper, or scissors"), computerPlay()));
-        console.log(`Player: ${playerScore} Computer: ${computerScore}`);
-      } 
+    const rockButton = document.querySelector('#rock');
+    const paperButton = document.querySelector('#paper');
+    const scissorsButton = document.querySelector('#scissors');
+    const message = document.querySelector('#message');
+    const playerScoreMessage = document.querySelector('#playerScore');
+    const computerScoreMessage = document.querySelector('#computerScore');
 
-      if (playerScore > computerScore) {
-        console.log("Congratulations, you win!");
-      } else if (computerScore > playerScore) {
-        console.log("Oh no, you lose!");
-      } else {
-        console.log("Tie game!");
+    function playRock() {
+      message.textContent = playRound("Rock", computerPlay());
+      updateScores();
+    }
+
+    function playPaper() {
+      message.textContent = playRound("Paper", computerPlay());
+      updateScores();
+    }
+
+    function playScissors() {
+      message.textContent = playRound("Scissors", computerPlay());
+      updateScores();
+    }
+
+    function updateScores() {
+      playerScoreMessage.textContent = `Player score: ${playerScore}`;
+      computerScoreMessage.textContent = `Computer score: ${computerScore}`;
+
+      if (playerScore === 5) {
+        message.textContent += " Player wins the game!"
+        disableButtons();
+      } else if (computerScore === 5) {
+        message.textContent += " Computer wins the game!"
+        disableButtons();
       }
     }
 
-    game();
+    function disableButtons() {
+      rockButton.disabled = true;
+      paperButton.disabled = true;
+      scissorsButton.disabled = true;
+    }
+
+    rockButton.addEventListener('click', function() {
+      message.textContent = playRound("Rock", computerPlay());
+      updateScores();
+    });
+    paperButton.addEventListener('click', function() {
+      message.textContent = playRound("Paper", computerPlay());
+      updateScores();
+    });
+    scissorsButton.addEventListener('Scissors', function() {
+      message.textContent = playRound("Rock", computerPlay());
+      updateScores();
+    });
+
+
   </script>
 </body>
 </html>
