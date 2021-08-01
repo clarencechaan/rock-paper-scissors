@@ -67,21 +67,6 @@
     const playerScoreMessage = document.querySelector('#playerScore');
     const computerScoreMessage = document.querySelector('#computerScore');
 
-    function playRock() {
-      message.textContent = playRound("Rock", computerPlay());
-      updateScores();
-    }
-
-    function playPaper() {
-      message.textContent = playRound("Paper", computerPlay());
-      updateScores();
-    }
-
-    function playScissors() {
-      message.textContent = playRound("Scissors", computerPlay());
-      updateScores();
-    }
-
     function updateScores() {
       playerScoreMessage.textContent = `Player score: ${playerScore}`;
       computerScoreMessage.textContent = `Computer score: ${computerScore}`;
@@ -113,7 +98,6 @@
       message.textContent = playRound("Scissors", computerPlay());
       updateScores();
     });
-
 
   </script>
 </body>
